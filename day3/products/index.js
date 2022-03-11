@@ -1,5 +1,3 @@
-// const axios = require('axios').default
-
 const products = [
   {
     id: 4,
@@ -965,96 +963,35 @@ const products = [
   },
 ]
 
-// filter ıd =  5
+const tableElement = document.querySelector('table')
 
-// for (let i = 0; i < products.length; i++) {
-//   if (products[i].id == 5) {
-//     console.log(products[i])
-//   }
-// }
+console.log(tableElement)
 
-// let fiteredProducts = products.filter((product) => product.id == 5)
-// console.log(fiteredProducts)
+const header = `<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Price</th>
+<th>afterTax</th>
+</tr>`
 
-// for (let i = 0; i < products.length; i++) {
-//   if (products[i].unitPrice > 30 && products[i].categoryId != 2) {
-//     filteredProducts.push(products[i])
-//   }
-// }
-// console.log(filteredProducts)
-
-// // filter unitPrice > 30 and categoryId != 2
-// products.filter((product) => {
-//   if (product.unitPrice > 30 && product.categoryId != 2) {
-//     filteredProducts.push(product)
-//   }
-// })
-// console.log(filteredProducts)
-
-// // filter no stock
-
-// for (let i = 0; i < products.length; i++) {
-//   if (products[i].unitsInStock == 0) {
-//     filteredProducts.push(products[i])
-//   }
-// }
-// console.log(filteredProducts)
-
-// products.filter((products) => {
-//   if (products.unitsInStock == 0) {
-//     filteredProducts.push(products)
-//   }
-// })
-// console.log(filteredProducts)
-
-// // fetch products from https://northwind.vercel.app/api/products
-
-// axios.get('https://northwind.vercel.app/api/products').then((response) => {
-//   products = response.data
-//   filteredProducts = products.filter((product) => product.unitsInStock == 0)
-//   console.log(filteredProducts)
-//   console.log('stokta olmayan urun sayısı:', filteredProducts.length)
-// })
-
-// let maxPrice = 0
-// let maxProdut
-// products.forEach((product) => {
-//   if (product.unitPrice > maxPrice) {
-//     maxPrice = product.unitPrice
-//     maxProdut = product
-//   }
-// })
-
-// console.log(maxProdut, maxPrice)
-
-// const result = products.sort((a, b) => {
-//    b.unitPrice-a.unitPrice
-// })[0]
-// console.log(result)
+tableElement.innerHTML = header
 
 products.forEach((product) => {
-  // if (product.category != undefined && product.category != null) {
-  //   console.log(product.category.name)
-  // }
+  let afterTax = (product.unitPrice * 118) / 100
 
-  // product.category ? console.log(product.category.name) : ''
-
-  console.log(product.category?.name)
+  if (product.unitsInStock < 5) {
+    tableElement.innerHTML += `<tr style="color:red ">
+    <td>${product.id}</td>
+    <td>${product.name}</td>
+    <td>${product.unitPrice.toFixed()}</td>
+    <td>${afterTax.toFixed()}</td>
+    </tr>`
+  } else {
+    tableElement.innerHTML += `<tr>
+    <td>${product.id}</td>
+    <td>${product.name}</td>
+    <td>${product.unitPrice.toFixed()}</td>
+    <td>${afterTax.toFixed()}</td>
+    </tr>`
+  }
 })
-
-// suppliers.forEach((supplier) => {
-//   if (supplier.address.country == 'Japan') console.log(supplier.companyName)
-// })
-
-// const numbers = suppliers.map((supplier) => {
-//   let number = supplier.address.phone.toString()
-
-//   return +number
-//     .replace('(', '')
-//     .replace(')', '')
-//     .replace(' ', '')
-//     .replace('-', '')
-//     .replace('.', '')
-// })
-
-// console.log(numbers)
